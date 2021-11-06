@@ -1,4 +1,5 @@
 from django.db import models
+# from django.utils import timezone 
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
 
@@ -24,6 +25,7 @@ class Room(models.Model):
     class Meta:
         ordering = ['-updated', '-created']
 
+
     def __str__(self):
         return self.name
 
@@ -37,7 +39,6 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:5]
-
 
 
 
