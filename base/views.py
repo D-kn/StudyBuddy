@@ -84,8 +84,8 @@ def home(request):
     room_count = rooms.count()
     # room_messages = Message.objects.all()
     room_messages = Message.objects.filter(Q(room__topic__name__icontains=q))
-    context = {'rooms': rooms, 'topics': topics, 
-               'room_count': room_count, 'room_messages': room_messages}
+    context = {'rooms': rooms, 'topics': topics,'room_count': room_count, 
+               'room_messages': room_messages}
     return render(request, 'base/home.html', context)
     # return HttpResponse('Home page')
 
@@ -109,11 +109,22 @@ def room(request, pk):
         room.participants.add(request.user)
         return redirect('room', pk=room.id)
 
-
     context = {'room':room, 'room_messages': room_messages, 
                 'participants': participants}
     return render(request, 'base/room.html', context)
     # return HttpResponse('ROOM')
+
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all() 
+
+    context = {'user': user, 'rooms': rooms,'room_messages': room_messages, 
+               'topics': topics}
+    return render(request, 'base/profile.html', context)
 
 
 
@@ -125,6 +136,7 @@ def createRoom(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+
     context = {'form':form}
     return render(request, 'base/room_form.html', context)
 
@@ -143,6 +155,7 @@ def updateRoom(request, pk):
         if form.is_valid():
             form.save()
             return redirect('home')
+
     context = {'form':form}
     return render(request, 'base/room_form.html', context)
 
