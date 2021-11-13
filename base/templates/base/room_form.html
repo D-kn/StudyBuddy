@@ -20,9 +20,7 @@
         </div>
       </div>
       <div class="layout__body">
-        <form class="form" action="" method="POST">
-         {% csrf_token %}
-
+        <form class="form" action="" method="POST">{% csrf_token %}
           <div class="form__group">
             <label for="room_topic">Enter a Topic</label>
             <input required type="text" value="{{room.topic.name}}" name="topic" list="topic-list"/>

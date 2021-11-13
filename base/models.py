@@ -22,7 +22,7 @@ class Room(models.Model):
                    User, related_name="participants", blank=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-
+    
     class Meta:
         ordering = ['-updated', '-created']
 
