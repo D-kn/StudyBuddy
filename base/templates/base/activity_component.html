@@ -7,10 +7,10 @@
       <div class="activities__boxHeader roomListRoom__header">
         <a href="{% url 'user-profile' message.user.id %}" class="roomListRoom__author">
           <div class="avatar avatar--small">
-            <img src="https://randomuser.me/api/portraits/women/11.jpg" />
+            <img src="{{message.user.avatar.url}}" />
           </div>
           <p>
-            @{{message.user}}
+            @{{message.user.username}}
             <span>{{message.created|timesince}} ago</span>
           </p>
         </a>
@@ -27,7 +27,7 @@
           </a>
         </div>
         {% endif %}
-
+      
       </div>
       <div class="activities__boxContent">
         <p>replied to post “<a href="{% url 'room' message.room.id %}">{{message.room}}</a>”</p>
